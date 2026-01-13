@@ -36,7 +36,24 @@ function parseJsonResponse(text: string): unknown {
     );
   }
 
-  return JSON.parse(trimmed);
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    // If JSON parsing fails due to control characters, try to fix them
+    console.warn(
+      "Initial JSON parse failed, attempting to fix control characters..."
+    );
+
+    // Replace problematic control characters within string values
+    const fixed = trimmed
+      .replace(/\n/g, "\\n") // Replace actual newlines with \n
+      .replace(/\r/g, "\\r") // Replace carriage returns
+      .replace(/\t/g, "\\t") // Replace tabs
+      .replace(/\f/g, "\\f") // Replace form feeds
+      .replace(/\b/g, "\\b"); // Replace backspaces
+
+    return JSON.parse(fixed);
+  }
 }
 
 // Generate content with fallback model

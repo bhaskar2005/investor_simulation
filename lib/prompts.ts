@@ -139,5 +139,7 @@ Respond with a JSON object in exactly this format (no markdown, just raw JSON):
   "keyQuestions": [<3-4 questions you'd ask the founder in a pitch meeting>]
 }
 
+IMPORTANT: Ensure all string values are properly JSON-escaped. Use \\n for newlines within strings, not actual line breaks. Do not include any actual newline characters in the JSON.
+
 Be authentic to your investment philosophy and communication style. Give realistic valuations based on the stage and idea. If it's not a fit, be honest but constructive.`;
 }
